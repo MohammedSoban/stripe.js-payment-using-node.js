@@ -12,18 +12,26 @@ class CheckoutForm extends Component {
     // User clicked submit
     debugger
     let {token} = await this.props.stripe.createToken({name: "muhammad soban"});
-  let response = await fetch("http://localhost:9000/charge", {
+   fetch("http://localhost:9000/charge", {
     method: "POST",
     headers: {"Content-Type": "text/plain"},
     body: token.id
+  }).then(data=>{
+    return data.json()
+  }).then(data=>{
+    console.log(data)
+  }).catch(err=>{
+    console.log(err)
   });
 
-  if (response.ok) {
-    debugger 
-    this.setState({complete: true});
-  console.log("Purchase Complete!") 
-  console.log(response)
-  }
+ // console.log(response))
+  // if (response.ok) {
+  //   debugger 
+  //   this.setState({complete: true});
+  // console.log("Purchase Complete!") 
+  // console.log(response.response)
+  // console.log(response)
+  // }
 
   // var url = "http://localhost:9000/charge"
 
@@ -34,7 +42,7 @@ class CheckoutForm extends Component {
   // }).then((response) => {
   //   debugger
   //   return response.json()
-  // }).then((response) => {
+  // }).then((  ) => {
   //   debugger
   //   if (response.status === 200) {
   //     debugger 

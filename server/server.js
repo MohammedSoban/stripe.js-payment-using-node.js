@@ -7,15 +7,19 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.post("/charge", async (req, res) => {
     try {
-      let {status} = await stripe.charges.create({
+      let status = await stripe.charges.create({
         amount: 2000,
         currency: "usd",
         description: "An example charge",
         source: req.body
       });
   
-      res.json({status});
-      console.log(res)
+      //hold ={}
+
+      res.json(status);
+    
+     console.log(status)
+    ;                                      
     } catch (err) {
       console.log(err);
       res.status(500).end();
